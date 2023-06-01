@@ -1,17 +1,20 @@
 package model.business;
 
+import java.util.ArrayList;
+
 public class Plate {
     private int idPlate;
     private String plateName;
     private double probability;
     private double price;
-
     private int amountPurchased;
+    private ArrayList<Integer> ratings;
 
     public Plate(int idPlate, String plateName, double price) {
         this.idPlate = idPlate;
         this.plateName = plateName;
         this.price = price;
+        ratings = new ArrayList<>();
     }
 
     public Plate() {
@@ -55,5 +58,17 @@ public class Plate {
 
     public void setAmountPurchased(int amountPurchased) {
         this.amountPurchased = amountPurchased;
+    }
+
+    public ArrayList<Integer> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(ArrayList<Integer> ratings) {
+        this.ratings = ratings;
+    }
+
+    public void addAmountPurchased(){
+
     }
 }

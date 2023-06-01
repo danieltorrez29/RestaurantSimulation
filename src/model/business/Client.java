@@ -10,7 +10,6 @@ public class Client extends Thread{
 	public Client(Double time) {
 		this.id = ID_BASE++;
 		this.time = time;
-		System.out.println("ID CLIENTE:" + id);
 	}
 	
 	@Override

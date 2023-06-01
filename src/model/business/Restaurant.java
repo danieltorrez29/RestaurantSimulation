@@ -17,6 +17,9 @@ public class Restaurant {
     private List<Double> listTimesToEat;
     private List<Double> listTimesWaiters;
 
+    private List<Statistics> statistics;
+
+    private List<Table> tables;
     private List<Waiter> listWaiters;
     private static Restaurant restaurant = new Restaurant();
     private MiddleSquare hoursRandom;
@@ -25,6 +28,8 @@ public class Restaurant {
     private MiddleSquare timesWaitersRandom;
     private int countClients = 0;
     private int totalSales;
+    private double totalTips;
+    private double totalProfits;
 
     public static Restaurant getInstance() {
         return restaurant;
@@ -40,6 +45,8 @@ public class Restaurant {
         listTimesToEat = new ArrayList<>();
         listTimesWaiters = new ArrayList<>();
         listWaiters = new ArrayList<>();
+        tables = new ArrayList<>();
+        statistics = new ArrayList<>();
     }
 
     private void initializeRandomValues() {
@@ -49,12 +56,13 @@ public class Restaurant {
         timesWaitersRandom = new MiddleSquare(4, 10);
     }
 
-    public void init(int daysOfSimulation,int numberWaiters) {
+    public void init(int daysOfSimulation,int numberWaiters,int tables) {
         manageValues(daysOfSimulation);
         addPlates();
+        addEmployees(numberWaiters);
+        addTables(tables);
         generateDays(daysOfSimulation);
         startSimulation();
-        addEmployees(numberWaiters);
     }
 
     private void addEmployees(int numberWaiters) {
@@ -63,10 +71,21 @@ public class Restaurant {
         }
     }
 
+    private void addTables(int numberTables) {
+        for (int i = 0; i < 5; i++) {
+            tables.add(new Table());
+        }
+    }
+    private void addProfit(int profit) {
+        totalProfits += profit;
+    }
+
+
     private void generateReport() {
         System.out.println("\n REPORTE FINAL \n");
         int cantOfBandeja = 0, cantOfCuchuco = 0, cantOfPaella = 0, cantOfArroz = 0;
         double totalRatingBandeja = 0, totalRatingCuchuco = 0, totalRatingPaella = 0, totalRatingArroz = 0;
+
         for (Calification calification : ratings) {
             try {
                 switch (calification.getPlate().getIdPlate()) {
@@ -135,19 +154,9 @@ public class Restaurant {
             System.out.println("Dia No: " + day.getId());
             System.out.println("Horas trabajadas: " + day.getWorkedHours());
             System.out.println("Clientes en el dia: " + day.getTotalClients());
-            Table tableOne = new Table("Mesa 1 ");
-            Table tableTwo = new Table("Mesa 2 ");
-            Table tableThree = new Table("Mesa 3 ");
-            Table tableFour = new Table("Mesa 4 ");
-            Table tableFive = new Table("Mesa 5 ");
-            Table tableSix = new Table("Mesa 6 ");
-
-            tableOne.start();
-            tableTwo.start();
-            tableThree.start();
-            tableFour.start();
-            tableFive.start();
-            tableSix.start();
+            for (Table table : tables) {
+                table.start();
+            }
         }
         generateReport();
     }
@@ -169,6 +178,14 @@ public class Restaurant {
         }
     }
 
+    public void addNewSale(Double price){
+        this.totalSales += price;
+    }
+
+    public void addNewTip(Double tip){
+        this.totalTips += tip;
+    }
+
     public Plate probabilityChoosePlate() {
         double random = new MiddleSquare(0, 1).generateNi();
         Plate plate = new Plate();
@@ -186,6 +203,13 @@ public class Restaurant {
             plate = listOfPlates.get(5);
         }
         return plate;
+    }
+
+    public double calculateTotalTip(){
+        for (Table table: tables) {
+            this.totalTips += table.getAmountTip();
+        }
+        return totalTips;
     }
 
     public double obtainTimeToPrepare(int idPlate) throws ExceptionPlate {
@@ -307,14 +331,14 @@ public class Restaurant {
     public double obtainTip(){
         int tip = 0;
         double random = new MiddleSquare(0, 1).generateNi();
-        if (random > 0 && random <= 3.0 / 8.0) {
+        if (random > 0 && random <= 4.0 / 8.0) {
             tip = 0;
-        } else if (random > 3.0 / 8.0 && random <= 5.0 / 8.0) {
-            tip = 10000;
+        } else if (random > 4.0 / 8.0 && random <= 5.0 / 8.0) {
+            tip = 5000;
         } else if (random > 5.0 / 8.0 && random <= 7.0 / 8.0) {
-            tip = 20000;
+            tip = 10000;
         } else if (random > 7.0 / 8.0 && random <= 1) {
-            tip = 25000;
+            tip = 15000;
         }
         return tip;
     }
@@ -329,7 +353,6 @@ public class Restaurant {
         }
         return isChosen;
     }
-
     public boolean choosePlateByMajorPrice(){
         boolean isChosen = false;
         double random = new MiddleSquare(0, 1).generateNi();
@@ -340,6 +363,42 @@ public class Restaurant {
         }
         return isChosen;
     }
+    public double obtainAverageRating(int idPlate){
+        double total = 0;
+        int sizeRatings = listOfPlates.get(idPlate).getRatings().size();
+        for (int i = 0; i < sizeRatings ; i++) {
+            total += listOfPlates.get(idPlate).getRatings().get(i);
+        }
+        return  total / sizeRatings;
+    }
+
+    public double calculateProfits(int idPlate) {
+        double total = 0;
+        for (int i = 0; i < listOfPlates.size(); i++) {
+            if (listOfPlates.get(i).getIdPlate() == idPlate) {
+                total = listOfPlates.get(i).getAmountPurchased() * listOfPlates.get(i).getPrice();
+            }
+        }
+        return total * 0.25;
+    }
+
+    public double obtainAmount(int idPlate) {
+        double total = 0;
+        for (int i = 0; i < listOfPlates.size(); i++) {
+            if (listOfPlates.get(i).getIdPlate() == idPlate) {
+                total = listOfPlates.get(i).getAmountPurchased();
+            }
+        }
+        return total;
+    }
+
+    public void calculateStatistics(){
+        for (int i = 0; i < listOfPlates.size(); i++) {
+            statistics.add(new Statistics(listOfPlates.get(i).getPlateName(),obtainAmount(i),
+                    obtainAverageRating(i),calculateProfits(i)));
+        }
+    }
+
 
     public void addWaiter(Waiter waiter){
         listWaiters.add(waiter);
@@ -471,5 +530,13 @@ public class Restaurant {
 
     public void setListWaiters(List<Waiter> listWaiters) {
         this.listWaiters = listWaiters;
+    }
+
+    public double getTotalTips() {
+        return totalTips;
+    }
+
+    public void setTotalTips(double totalTips) {
+        this.totalTips = totalTips;
     }
 }
