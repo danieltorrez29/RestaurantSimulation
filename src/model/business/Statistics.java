@@ -49,4 +49,14 @@ public class Statistics {
     public void setProfit(double profit) {
         this.profit = profit;
     }
+
+    @Override
+    public String toString() {
+        return "Statistics{" +
+                "name='" + name + '\'' +
+                ", amountSold=" + amountSold +
+                ", rating=" + rating +
+                ", profit=" + profit +
+                '}';
+    }
 }

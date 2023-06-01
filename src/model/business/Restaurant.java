@@ -63,6 +63,8 @@ public class Restaurant {
         addTables(tables);
         generateDays(daysOfSimulation);
         startSimulation();
+        calculateStatistics();
+        System.out.println(statistics.toString());
     }
 
     private void addEmployees(int numberWaiters) {
@@ -78,61 +80,6 @@ public class Restaurant {
     }
     private void addProfit(int profit) {
         totalProfits += profit;
-    }
-
-
-    private void generateReport() {
-        System.out.println("\n REPORTE FINAL \n");
-        int cantOfBandeja = 0, cantOfCuchuco = 0, cantOfPaella = 0, cantOfArroz = 0;
-        double totalRatingBandeja = 0, totalRatingCuchuco = 0, totalRatingPaella = 0, totalRatingArroz = 0;
-
-        for (Calification calification : ratings) {
-            try {
-                switch (calification.getPlate().getIdPlate()) {
-                    case 0 -> {
-                        cantOfBandeja++;
-                        totalRatingBandeja += calification.getScore();
-                    }
-                    case 1 -> {
-                        cantOfCuchuco++;
-                        totalRatingCuchuco += calification.getScore();
-                    }
-                    case 2 -> {
-                        cantOfPaella++;
-                        totalRatingPaella += calification.getScore();
-                    }
-                    case 3 -> {
-                        cantOfArroz++;
-                        totalRatingArroz += calification.getScore();
-                    }
-                }
-            } catch (Exception e) {
-
-            }
-
-        }
-
-        double netWorthBandeja = (cantOfBandeja * 18000) * 0.25;
-        double netWorthCuchuco = (cantOfCuchuco * 12000) * 0.25;
-        double netWorthValencia = (cantOfPaella * 20000) * 0.25;
-        double netWorthArroz = (cantOfArroz * 17000) * 0.25;
-
-        System.out.println("Bandeja Paisa: " + cantOfBandeja + "\t Calificaci�n: " + totalRatingBandeja / cantOfBandeja);
-        System.out.println("Cuchuco de Trigo con Espinazo : " + cantOfCuchuco + "\t Calificaci�n: " + totalRatingCuchuco / cantOfCuchuco);
-        System.out.println("Paella a la Valenciana: " + cantOfPaella + "\t Calificaci�n:  " + totalRatingPaella / cantOfPaella);
-        System.out.println("Arroz con Pollo: " + cantOfArroz + "\t Calificaci�n:  " + totalRatingArroz / cantOfArroz);
-        System.out.println();
-        System.out.println("Bandeja: " + netWorthBandeja + " Cuchuco: " + netWorthCuchuco + " Valencia: " + netWorthValencia + " Arroz: " + netWorthArroz);
-        if (netWorthBandeja > netWorthCuchuco && netWorthBandeja > netWorthValencia && netWorthBandeja > netWorthArroz) {
-            System.out.println("El plato con mayor utilidad es la Bandeja Paisa con: " + netWorthBandeja);
-        } else if (netWorthCuchuco > netWorthValencia && netWorthCuchuco > netWorthArroz) {
-            System.out.println("El plato con mayor utilidad es el Cuchuco con: " + netWorthCuchuco);
-        } else if (netWorthValencia > netWorthArroz) {
-            System.out.println("El plato con mayor utilidad es la Paella con: " + netWorthValencia);
-        } else {
-            System.out.println("El plato con mayor utilidad es la Arroz con pollo con: " + netWorthArroz);
-        }
-        System.out.println();
     }
 
     public void addCalification(Calification calification) {
@@ -158,8 +105,9 @@ public class Restaurant {
                 table.start();
             }
         }
-        generateReport();
     }
+
+
 
     private void generateDays(int daysOfSimulation) {
         int days = 0;
@@ -210,6 +158,14 @@ public class Restaurant {
             this.totalTips += table.getAmountTip();
         }
         return totalTips;
+    }
+
+    public List<Statistics> getStatistics() {
+        return statistics;
+    }
+
+    public void setStatistics(List<Statistics> statistics) {
+        this.statistics = statistics;
     }
 
     public double obtainTimeToPrepare(int idPlate) throws ExceptionPlate {

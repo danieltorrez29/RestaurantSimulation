@@ -20,7 +20,7 @@ public class Waiter extends Thread {
 			service = true;
 			while (service) {
 				System.out.println("El mesero "+ id +" esta sirviendo...");
-				Thread.sleep((long) 100);
+				Thread.sleep((long) 1000);
 				break;
 			}
 			service = false;	
