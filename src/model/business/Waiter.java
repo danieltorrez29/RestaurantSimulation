@@ -1,14 +1,16 @@
-package entities;
+package model.business;
 
 public class Waiter extends Thread {
 	
 	private int id;
-	private int timeToServe;
+	private int ID_BASE=1;
+	private double timeToServe;
 	private boolean service;
 	
-	public Waiter(int id, int timeToServe) {
-		this.id = id;
-		this.timeToServe = timeToServe;
+	public Waiter() {
+		this.id = ID_BASE++;
+		this.timeToServe = 10000;
+		service = false;
 	}
 	
 	@Override
@@ -17,8 +19,8 @@ public class Waiter extends Thread {
 		try {
 			service = true;
 			while (service) {
-				System.out.println("El mesero "+ id +" está sirviendo...");
-				Thread.sleep(timeToServe);
+				System.out.println("El mesero "+ id +" esta sirviendo...");
+				Thread.sleep((long) timeToServe);
 				break;
 			}
 			service = false;	
@@ -33,10 +35,8 @@ public class Waiter extends Thread {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getTimeToServe() {
-		return timeToServe;
-	}
-	public void setTimeToServe(int timeToServe) {
+
+	public void setTimeToServe(Double timeToServe) {
 		this.timeToServe = timeToServe;
 	}
 
@@ -46,5 +46,13 @@ public class Waiter extends Thread {
 
 	public void setService(boolean service) {
 		this.service = service;
+	}
+
+	public double getTimeToServe() {
+		return timeToServe;
+	}
+
+	public void setTimeToServe(double timeToServe) {
+		this.timeToServe = timeToServe;
 	}
 }
