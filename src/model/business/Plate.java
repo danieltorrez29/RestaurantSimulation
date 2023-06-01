@@ -1,4 +1,4 @@
-package entities;
+package model.business;
 
 public class Plate {
     private int idPlate;

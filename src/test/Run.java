@@ -1,6 +1,6 @@
 package test;
 
-import entities.Restaurant;
+import model.business.Restaurant;
 
 public class Run {
 
