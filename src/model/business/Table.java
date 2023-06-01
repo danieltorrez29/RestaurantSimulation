@@ -1,6 +1,9 @@
 package model.business;
 
+import model.utilities.MiddleSquare;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Table extends Thread {
 
@@ -21,59 +24,41 @@ public class Table extends Thread {
 
 	@Override
 	public void run() {
-		Waiter waiter1 = new Waiter(1, 0);
-		Waiter waiter2 = new Waiter(2, 0);
-		waiter1.setService(false);
-		waiter2.setService(false);
+		List<Waiter> listWaiters = Restaurant.getInstance().getListWaiters();
 		super.run();
 		try {
 			freeTable = true;
 			for (int i = 0; i < 30; i++) {
 				Calification calification = new Calification();
-				int randomPlateOne = 0;
-				int randomPlateTwo = 0;
-				int randomPlateThree = 0;
-				while(randomPlateOne == randomPlateTwo || randomPlateTwo == randomPlateThree || randomPlateThree == randomPlateOne  ){
-					 randomPlateOne = (int) (Math.random() *(4 -  0) + 0);
-					 randomPlateTwo = (int) (Math.random() *(4 -  0) + 0);
-					 randomPlateThree = (int) (Math.random() *(4 -  0) + 0);
-				}
 				this.addToTable();
 				this.startEat();
 				calification.setPlate(Restaurant.getInstance().probabilityChoosePlate());
 				int countOfClients = listClients.size();
 				listClients.removeAll(listClients);
-				//clientes 
-				waiter1.setTimeToServe(Restaurant.getInstance().getListTimesWaiters().get((int) (Math.random() * 29) + 1));
-				if(!waiter2.isService()) {  
-					waiter1.setTimeToServe(Restaurant.getInstance().getListTimesWaiters().get((int) (Math.random() * 29) + 1));
-					this.setWaiter(waiter1);
-					waiter1.setService(true);
-					waiter1.run();
-					waiter1.setService(false);
+				for (Waiter waiter : listWaiters) {
+					if (!waiter.isService()) {
+						waiter.setService(false);
+						waiter.setTimeToServe(Restaurant.getInstance().getTimesWaitersRandom().generateNi());
+						this.setWaiter(waiter);
+						waiter.run();
+						waiter.setService(true);
+					}
 				}
-				if(!waiter1.isService()) {
-					waiter2.setTimeToServe(Restaurant.getInstance().getListTimesWaiters().get((int) (Math.random() * 29) + 1));
-					waiter2.setService(true);
-					this.setWaiter(waiter2);
-					waiter2.run();
-					waiter2.setService(false);
-				}
-				Thread.sleep(this.getTime()+100);
-				calification.setScore((int) (Math.random() * (5 - 0) + 1) + 0);
+				Thread.sleep(this.getTime()+1000);
+				calification.setScore((int) new MiddleSquare(1,5).generateNi());
 				System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calification.getPlate().getPlateName() + " Puntaje: " + calification.getScore());
 				
 				if(countOfClients == 2) {
 					Calification calificationTwo = new Calification();
-					calificationTwo.setPlate(Restaurant.getInstance().getListOfPlates().get(randomPlateTwo));
-					calificationTwo.setScore((int) (Math.random() * (5 - 0) + 1) + 0);
+					calificationTwo.setPlate(Restaurant.getInstance().getListOfPlates().get((int) new MiddleSquare(0,6).generateNi()));
+					calificationTwo.setScore((int) new MiddleSquare(1,5).generateNi());
 					System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calificationTwo.getPlate().getPlateName() + " Puntaje: " + calificationTwo.getScore());
 					Restaurant.getInstance().addCalification(calificationTwo);
 					
 				} else if (countOfClients == 3) {
 					Calification calificationThree = new Calification();
-					calificationThree.setPlate(Restaurant.getInstance().getListOfPlates().get(randomPlateThree));
-					calificationThree.setScore((int) (Math.random() * (5 - 0) + 1) + 0);
+					calificationThree.setPlate(Restaurant.getInstance().getListOfPlates().get((int) new MiddleSquare(0,6).generateNi()));
+					calificationThree.setScore((int) new MiddleSquare(1,5).generateNi());
 					System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calificationThree.getPlate().getPlateName() + " Puntaje: " + calificationThree.getScore());
 					Restaurant.getInstance().addCalification(calificationThree);
 				}
@@ -87,7 +72,9 @@ public class Table extends Thread {
 	}
 
 	public void addToTable() {
-		for (int i = 0; i < (int)(Math.random()*3 + 1); i++) {
+		int ramdomTable = (int) new MiddleSquare(1,7).generateNi();
+		for (int i = 0; i < ramdomTable; i++) {
+			Restaurant.getRestaurant().increaseClients();
 			listClients.add(new Client(Restaurant.getInstance().getListTimesToEat().get(5)));
 		}
 		System.out.println("Mesa Numero: "+idTable+" con "+ listClients.size()+ " clientes");
@@ -95,22 +82,22 @@ public class Table extends Thread {
 	
 	public int getTime() {
 		double aux = 0;
-		for (int i = 0; i < listClients.size(); i++) {
-			aux += listClients.get(i).getTime(); 
+		for (Client listClient : listClients) {
+			aux += listClient.getTime();
 		}
 		return (int) aux;
 	}
 
 	public void startEat() {
-		for (int i = 0; i < listClients.size(); i++) {
-			listClients.get(i).start();
-			System.out.println(listClients.get(i).toString());
+		for (Client listClient : listClients) {
+			listClient.start();
+			System.out.println(listClient.toString());
 		}
 	}
 
 	public void remove() {
 		for (int i = 0; i < listClients.size(); i++) { 
-			if (listClients.get(i).isEating() == false) {
+			if (!listClients.get(i).isEating()) {
 				listClients.remove(i);
 			}
 		}

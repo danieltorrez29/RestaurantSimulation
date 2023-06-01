@@ -4,10 +4,14 @@ public class Plate {
     private int idPlate;
     private String plateName;
     private double probability;
+    private double price;
 
-    public Plate(int id, String namePlate) {
-        this.idPlate = id;
-        this.plateName = namePlate;
+    private int amountPurchased;
+
+    public Plate(int idPlate, String plateName, double price) {
+        this.idPlate = idPlate;
+        this.plateName = plateName;
+        this.price = price;
     }
 
     public Plate() {
@@ -35,5 +39,21 @@ public class Plate {
 
     public void setRatingProbability(double probability) {
         this.probability = probability;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getAmountPurchased() {
+        return amountPurchased;
+    }
+
+    public void setAmountPurchased(int amountPurchased) {
+        this.amountPurchased = amountPurchased;
     }
 }

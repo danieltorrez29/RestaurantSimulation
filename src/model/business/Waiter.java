@@ -3,12 +3,14 @@ package model.business;
 public class Waiter extends Thread {
 	
 	private int id;
+	private int ID_BASE=1;
 	private double timeToServe;
 	private boolean service;
 	
-	public Waiter(int id, double timeToServe) {
-		this.id = id;
-		this.timeToServe = timeToServe;
+	public Waiter() {
+		this.id = ID_BASE++;
+		this.timeToServe = 10000;
+		service = false;
 	}
 	
 	@Override
@@ -18,7 +20,7 @@ public class Waiter extends Thread {
 			service = true;
 			while (service) {
 				System.out.println("El mesero "+ id +" esta sirviendo...");
-				Thread.sleep((long) timeToServe);
+				Thread.sleep((long) 100);
 				break;
 			}
 			service = false;	

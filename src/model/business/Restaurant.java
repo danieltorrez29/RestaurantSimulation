@@ -16,11 +16,15 @@ public class Restaurant {
     private List<Integer> listDataClients;
     private List<Double> listTimesToEat;
     private List<Double> listTimesWaiters;
+
+    private List<Waiter> listWaiters;
     private static Restaurant restaurant = new Restaurant();
     private MiddleSquare hoursRandom;
     private MiddleSquare clientsRandom;
     private MiddleSquare timesToEatRandom;
     private MiddleSquare timesWaitersRandom;
+    private int countClients = 0;
+    private int totalSales;
 
     public static Restaurant getInstance() {
         return restaurant;
@@ -35,6 +39,7 @@ public class Restaurant {
         listDataClients = new ArrayList<>();
         listTimesToEat = new ArrayList<>();
         listTimesWaiters = new ArrayList<>();
+        listWaiters = new ArrayList<>();
     }
 
     private void initializeRandomValues() {
@@ -44,11 +49,18 @@ public class Restaurant {
         timesWaitersRandom = new MiddleSquare(4, 10);
     }
 
-    public void init(int daysOfSimulation) {
+    public void init(int daysOfSimulation,int numberWaiters) {
         manageValues(daysOfSimulation);
         addPlates();
         generateDays(daysOfSimulation);
         startSimulation();
+        addEmployees(numberWaiters);
+    }
+
+    private void addEmployees(int numberWaiters) {
+        for (int i = 0; i < numberWaiters; i++) {
+            listWaiters.add(new Waiter());
+        }
     }
 
     private void generateReport() {
@@ -58,24 +70,25 @@ public class Restaurant {
         for (Calification calification : ratings) {
             try {
                 switch (calification.getPlate().getIdPlate()) {
-                    case 0:
+                    case 0 -> {
                         cantOfBandeja++;
                         totalRatingBandeja += calification.getScore();
-                        break;
-                    case 1:
+                    }
+                    case 1 -> {
                         cantOfCuchuco++;
                         totalRatingCuchuco += calification.getScore();
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         cantOfPaella++;
                         totalRatingPaella += calification.getScore();
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
                         cantOfArroz++;
                         totalRatingArroz += calification.getScore();
-                        break;
+                    }
                 }
             } catch (Exception e) {
+
             }
 
         }
@@ -108,12 +121,12 @@ public class Restaurant {
     }
 
     private void addPlates() {
-        listOfPlates.add(new Plate(0, "Filete de ternera con salsa de champiñones"));
-        listOfPlates.add(new Plate(1, "Salmón a la parrilla con salsa de limón"));
-        listOfPlates.add(new Plate(2, "Pollo al curry con arroz basmati"));
-        listOfPlates.add(new Plate(3, "Lasaña de carne"));
-        listOfPlates.add(new Plate(4, "Risotto de champiñones y parmesano"));
-        listOfPlates.add(new Plate(5, "Costillas de cerdo BBQ con puré de papas"));
+        listOfPlates.add(new Plate(0, "Filete de ternera con salsa de champiñones",42000));
+        listOfPlates.add(new Plate(1, "Salmón a la parrilla con salsa de limón",37000));
+        listOfPlates.add(new Plate(2, "Pollo al curry con arroz basmati",26000));
+        listOfPlates.add(new Plate(3, "Lasaña de carne",31000));
+        listOfPlates.add(new Plate(4, "Risotto de champiñones y parmesano",38000));
+        listOfPlates.add(new Plate(5, "Costillas de cerdo BBQ con puré de papas",36000));
     }
 
     private void startSimulation() {
@@ -127,12 +140,14 @@ public class Restaurant {
             Table tableThree = new Table("Mesa 3 ");
             Table tableFour = new Table("Mesa 4 ");
             Table tableFive = new Table("Mesa 5 ");
+            Table tableSix = new Table("Mesa 6 ");
 
             tableOne.start();
             tableTwo.start();
             tableThree.start();
             tableFour.start();
             tableFive.start();
+            tableSix.start();
         }
         generateReport();
     }
@@ -325,6 +340,22 @@ public class Restaurant {
         }
         return isChosen;
     }
+
+    public void addWaiter(Waiter waiter){
+        listWaiters.add(waiter);
+    }
+
+    public int getTotalSales() {
+        return totalSales;
+    }
+
+    public void setTotalSales(int totalSales) {
+        this.totalSales = totalSales;
+    }
+
+    public void increaseClients(){
+        this.countClients++;
+    }
     public List<Day> getDaysInSimulation() {
         return daysInSimulation;
     }
@@ -424,5 +455,21 @@ public class Restaurant {
 
     public void setTimesWaitersRandom(MiddleSquare timesWaitersRandom) {
         this.timesWaitersRandom = timesWaitersRandom;
+    }
+
+    public int getCountClients() {
+        return countClients;
+    }
+
+    public void setCountClients(int countClients) {
+        this.countClients = countClients;
+    }
+
+    public List<Waiter> getListWaiters() {
+        return listWaiters;
+    }
+
+    public void setListWaiters(List<Waiter> listWaiters) {
+        this.listWaiters = listWaiters;
     }
 }
