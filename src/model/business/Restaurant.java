@@ -63,8 +63,6 @@ public class Restaurant {
         addTables(tables);
         generateDays(daysOfSimulation);
         startSimulation();
-        calculateStatistics();
-        System.out.println(statistics.toString());
     }
 
     private void addEmployees(int numberWaiters) {
