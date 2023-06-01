@@ -1,12 +1,18 @@
 package model.business;
 
+import model.utilities.MiddleSquare;
+
 public class Day {
 	private int id;
     private int workedHours;
     private int totalClients;
 
-    public Day(int id, int workedHours, int totalClients) {
-        this.id = id;
+    public static int ID_BASE = 1;
+
+    private MiddleSquare random;
+
+    public Day(int workedHours, int totalClients) {
+        this.id = ID_BASE++;
         this.workedHours = workedHours;
         this.totalClients = totalClients;
     }

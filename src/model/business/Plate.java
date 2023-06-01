@@ -5,10 +5,12 @@ public class Plate {
     private String plateName;
     private double probability;
 
-    public Plate(int id, String namePlate, double probability) {
+    public Plate(int id, String namePlate) {
         this.idPlate = id;
         this.plateName = namePlate;
-        this.probability = probability;
+    }
+
+    public Plate() {
     }
 
     public int getIdPlate() {

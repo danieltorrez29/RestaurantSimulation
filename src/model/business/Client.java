@@ -4,12 +4,13 @@ public class Client extends Thread{
 	
 	private int id;
 	public static int ID_BASE = 0;
-	private int time;
+	private double time;
 	private boolean isEating;
 
-	public Client(int time) {
+	public Client(Double time) {
 		this.id = ID_BASE++;
 		this.time = time;
+		System.out.println("ID CLIENTE:" + id);
 	}
 	
 	@Override
@@ -24,7 +25,7 @@ public class Client extends Thread{
 			isEating = true;
 			while (isEating) {
 				System.out.println("comiendo...");
-				Thread.sleep(time);
+				Thread.sleep((long) time);
 				break;
 			}
 			isEating = false;	
@@ -43,10 +44,12 @@ public class Client extends Thread{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getTime() {
+
+	public double getTime() {
 		return time;
 	}
-	public void setTime(int time) {
+
+	public void setTime(double time) {
 		this.time = time;
-	}	
+	}
 }

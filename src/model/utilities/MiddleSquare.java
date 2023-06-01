@@ -32,8 +32,8 @@ public class MiddleSquare {
 	 * 
 	 * Constructor method that generates a random seed using SecureRandom.
 	 * 
-	 * @param min.
-	 * @param max.
+	 * @param min
+	 * @param max
 	 */
 
 	public MiddleSquare(int min, int max) {
