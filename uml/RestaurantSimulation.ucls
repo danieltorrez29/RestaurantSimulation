@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" automaticImage="JPEG" always-add-relationships="true" generalizations="true" 
   realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
-  <package id="1" language="java" name="entities" project="RestaurantSimulation" 
-    file="/RestaurantSimulation/src/entities" binary="false" corner="BOTTOM_RIGHT">    
+  <package id="1" language="java" name="model.business" project="RestaurantSimulation" 
+    file="/RestaurantSimulation/src/model.business" binary="false" corner="BOTTOM_RIGHT">    
     <position height="1345" width="914" x="132" y="43"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="2" language="java" name="entities.Calification" project="RestaurantSimulation" 
-    file="/RestaurantSimulation/src/entities/Calification.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="model.business.Calification" project="RestaurantSimulation" 
+    file="/RestaurantSimulation/src/model.business/Calification.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="252" y="469"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -15,8 +15,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="entities.Client" project="RestaurantSimulation" 
-    file="/RestaurantSimulation/src/entities/Client.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="model.business.Client" project="RestaurantSimulation" 
+    file="/RestaurantSimulation/src/model.business/Client.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="929" y="1132"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -24,8 +24,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="entities.Day" project="RestaurantSimulation" 
-    file="/RestaurantSimulation/src/entities/Day.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="model.business.Day" project="RestaurantSimulation" 
+    file="/RestaurantSimulation/src/model.business/Day.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="936" y="467"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -33,8 +33,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="entities.Plate" project="RestaurantSimulation" 
-    file="/RestaurantSimulation/src/entities/Plate.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="model.business.Plate" project="RestaurantSimulation" 
+    file="/RestaurantSimulation/src/model.business/Plate.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="255" y="881"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -42,8 +42,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="entities.Restaurant" project="RestaurantSimulation" 
-    file="/RestaurantSimulation/src/entities/Restaurant.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="model.business.Restaurant" project="RestaurantSimulation" 
+    file="/RestaurantSimulation/src/model.business/Restaurant.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="609" y="470"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -51,8 +51,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="entities.Table" project="RestaurantSimulation" 
-    file="/RestaurantSimulation/src/entities/Table.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="model.business.Table" project="RestaurantSimulation" 
+    file="/RestaurantSimulation/src/model.business/Table.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="622" y="1137"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -60,8 +60,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="entities.Waiter" project="RestaurantSimulation" 
-    file="/RestaurantSimulation/src/entities/Waiter.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="model.business.Waiter" project="RestaurantSimulation" 
+    file="/RestaurantSimulation/src/model.business/Waiter.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="934" y="780"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

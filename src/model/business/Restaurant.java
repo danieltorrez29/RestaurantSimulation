@@ -1,4 +1,4 @@
-package entities;
+package model.business;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,10 +65,10 @@ public class Restaurant {
 		double 	netWorthValencia = (cantOfPaella*20000)*0.25;
 		double 	netWorthArroz = (cantOfArroz*17000)*0.25;
 		
-		System.out.println("Bandeja Paisa: " + cantOfBandeja + "\t Calificación: " + totalRatingBandeja / cantOfBandeja);
-		System.out.println("Cuchuco de Trigo con Espinazo : " + cantOfCuchuco + "\t Calificación: " + totalRatingCuchuco / cantOfCuchuco);
-		System.out.println("Paella a la Valenciana: " + cantOfPaella + "\t Calificación:  " + totalRatingPaella / cantOfPaella);
-		System.out.println("Arroz con Pollo: " + cantOfArroz + "\t Calificación:  " + totalRatingArroz / cantOfArroz);
+		System.out.println("Bandeja Paisa: " + cantOfBandeja + "\t Calificaciï¿½n: " + totalRatingBandeja / cantOfBandeja);
+		System.out.println("Cuchuco de Trigo con Espinazo : " + cantOfCuchuco + "\t Calificaciï¿½n: " + totalRatingCuchuco / cantOfCuchuco);
+		System.out.println("Paella a la Valenciana: " + cantOfPaella + "\t Calificaciï¿½n:  " + totalRatingPaella / cantOfPaella);
+		System.out.println("Arroz con Pollo: " + cantOfArroz + "\t Calificaciï¿½n:  " + totalRatingArroz / cantOfArroz);
 		System.out.println();
 		System.out.println("Bandeja: "+netWorthBandeja+ " Cuchuco: " + netWorthCuchuco + " Valencia: "+ netWorthValencia+ " Arroz: " + netWorthArroz);
 		if(netWorthBandeja > netWorthCuchuco && netWorthBandeja > netWorthValencia && netWorthBandeja > netWorthArroz ) {
